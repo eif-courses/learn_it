@@ -1,6 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import {useRouter} from "next/router";
+import Nav from "~/components/nav";
 
 export const Header = () => {
   const { data: sessionData } = useSession();
@@ -18,7 +19,7 @@ export const Header = () => {
             </Link></li>
             <li><Link href="/contacts" className={router.pathname == "/contacts" ? "active" : ""}>Contacts</Link></li>
 
-            <li><Link href="/">Keisti kalbą</Link></li>
+            <li>   <Nav/></li>
           </ul>
         </div>
         <img src="/logo_pirmas.png" width="64px" height="64px"/>
@@ -30,7 +31,7 @@ export const Header = () => {
               Home
           </Link></li>
           <li><Link href="/contacts" className={router.pathname == "/contacts" ? "active" : ""}>Contacts</Link></li>
-          <li><Link href="/">Keisti kalbą</Link></li>
+          <li>   <Nav/></li>
         </ul>
       </div>
       <div className="navbar-end">
