@@ -6,6 +6,9 @@ import { api, type RouterOutputs } from "~/utils/api";
 import { useState } from "react";
 
 // https://www.youtube.com/watch?v=J1gzN1SAhyM
+
+
+
 const Home: NextPage = () => {
   return (
     <>
@@ -111,5 +114,4 @@ const Content: React.FC = () => {
       </div>
     </div>
   );
-};
-
+}
