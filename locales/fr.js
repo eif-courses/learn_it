@@ -1,5 +1,5 @@
 export default {
-  title: 'Application de simulation d’audit d’entreprise',
+  title: 'Audit des sociétés fictives',
   subtitle: 'Accélérateur de science',
   signin: 'Connexion',
   directory: 'Liens utiles',

@@ -1,5 +1,5 @@
 export default {
-  title: 'Audit of dummy companies',
+  title: 'Audit di società fittizie',
   subtitle: 'Accelerating science',
   signin: 'Sign In',
   directory: 'Directory',

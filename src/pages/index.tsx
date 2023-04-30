@@ -7,7 +7,10 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import en from "../../locales/en";
 import fr from "../../locales/fr";
-import Nav from "~/components/nav";
+import bg from "../../locales/bg";
+import de from "../../locales/de";
+import it from "../../locales/it";
+import lt from "../../locales/lt";
 
 // https://www.youtube.com/watch?v=J1gzN1SAhyM
 
@@ -17,7 +20,13 @@ const Home: NextPage = () => {
 
   const router = useRouter();
   const { locale } = router;
-  const t = locale === 'en' ? en : fr;
+  const t =
+    locale === 'bg' ? bg :
+      locale === 'en' ? en :
+        locale === 'fr' ? fr :
+          locale === 'de' ? de :
+            locale === 'it' ? it :
+              locale === 'lt' ? lt : en;
   return (
     <>
       <Head>
