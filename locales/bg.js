@@ -1,5 +1,7 @@
 export default {
   title: 'Одит на фиктивни фирми',
+  platform: 'Платформа',
+  courses:'Курсове',
   subtitle: 'Accelerating science',
   signin: 'Sign In',
   directory: 'Directory',

@@ -1,5 +1,7 @@
 export default {
   title: 'Audit di società fittizie',
+  platform:'Piattaforma',
+  courses:'Corsi',
   subtitle: 'Accelerating science',
   signin: 'Sign In',
   directory: 'Directory',

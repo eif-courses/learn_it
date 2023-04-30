@@ -1,5 +1,7 @@
 export default {
   title: 'Imitacinių įmonių auditas',
+  platform: 'Platforma',
+  courses:'Kursai',
   subtitle: 'Accelerating science',
   signin: 'Sign In',
   directory: 'Directory',

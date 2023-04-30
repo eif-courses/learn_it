@@ -1,5 +1,7 @@
 export default {
   title: 'Prüfung von Scheinunternehmen',
+  platform:'Plattform',
+  courses:'Kurse',
   subtitle: 'Accelerating science',
   signin: 'Sign In',
   directory: 'Directory',

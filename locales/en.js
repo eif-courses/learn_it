@@ -1,5 +1,7 @@
 export default {
   title: 'Audit of dummy companies',
+  platform:'Platform',
+  courses:'Courses',
   subtitle: 'Accelerating science',
   signin: 'Sign In',
   directory: 'Directory',
