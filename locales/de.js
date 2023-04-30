@@ -1,7 +1,7 @@
 export default {
-  title: 'Audit of dummy companies',
-  platform:'Platform',
-  courses:'Courses',
+  title: 'Prüfung von Scheinunternehmen',
+  platform:'Plattform',
+  courses:'Kurse',
   subtitle: 'Accelerating science',
   signin: 'Sign In',
   directory: 'Directory',

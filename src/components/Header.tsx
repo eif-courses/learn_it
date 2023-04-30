@@ -2,10 +2,25 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import Nav from "~/components/nav";
+import bg from "../../locales/bg";
+import en from "../../locales/en";
+import fr from "../../locales/fr";
+import de from "../../locales/de";
+import it from "../../locales/it";
+import lt from "../../locales/lt";
 
 export const Header = () => {
   const { data: sessionData } = useSession();
+
   const router = useRouter();
+  const { locale } = router;
+  const t =
+    locale === 'bg' ? bg :
+      locale === 'en' ? en :
+        locale === 'fr' ? fr :
+          locale === 'de' ? de :
+            locale === 'it' ? it :
+              locale === 'lt' ? lt : en;
   return (
     <div className="navbar bg-base-100">
       <div className="navbar-start">
@@ -18,12 +33,13 @@ export const Header = () => {
               Home
             </Link></li>
             <li><Link href="/contacts" className={router.pathname == "/contacts" ? "active" : ""}>Contacts</Link></li>
+            <li><Link href="/platform" className={router.pathname == "/platform" ? "active" : ""}>{t.platform}</Link></li>
             <Nav/>
 
           </ul>
         </div>
         <img src="/logo_pirmas.png" width="64px" height="64px"/>
-        <a className="btn btn-ghost normal-case text-xl">Simulith Auditas</a>
+        <a className="btn btn-ghost normal-case text-xl">{t.title}</a>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1 py-4 gap-2">
@@ -31,6 +47,7 @@ export const Header = () => {
               Home
           </Link></li>
           <li><Link href="/contacts" className={router.pathname == "/contacts" ? "active" : ""}>Contacts</Link></li>
+          <li><Link href="/platform" className={router.pathname == "/platform" ? "active" : ""}>{t.platform}</Link></li>
           <Nav/>
         </ul>
       </div>
@@ -69,6 +86,5 @@ export const Header = () => {
         </div>
       </div>
     </div>
-
   );
 };

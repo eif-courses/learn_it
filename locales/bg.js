@@ -1,7 +1,7 @@
 export default {
-  title: 'Audit of dummy companies',
-  platform:'Platform',
-  courses:'Courses',
+  title: 'Одит на фиктивни фирми',
+  platform: 'Платформа',
+  courses:'Курсове',
   subtitle: 'Accelerating science',
   signin: 'Sign In',
   directory: 'Directory',

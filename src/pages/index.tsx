@@ -7,7 +7,10 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import en from "../../locales/en";
 import fr from "../../locales/fr";
-import Nav from "~/components/nav";
+import bg from "../../locales/bg";
+import de from "../../locales/de";
+import it from "../../locales/it";
+import lt from "../../locales/lt";
 
 // https://www.youtube.com/watch?v=J1gzN1SAhyM
 
@@ -15,9 +18,16 @@ import Nav from "~/components/nav";
 
 const Home: NextPage = () => {
 
+
   const router = useRouter();
   const { locale } = router;
-  const t = locale === 'en' ? en : fr;
+  const t =
+    locale === 'bg' ? bg :
+      locale === 'en' ? en :
+        locale === 'fr' ? fr :
+          locale === 'de' ? de :
+            locale === 'it' ? it :
+              locale === 'lt' ? lt : en;
   return (
     <>
       <Head>
@@ -27,6 +37,7 @@ const Home: NextPage = () => {
       </Head>
       <main className="container mx-auto">
         <Header />
+
         <section className="bg-white dark:bg-gray-900">
           <div className="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
             <div className="mr-auto place-self-center lg:col-span-7">
@@ -38,7 +49,7 @@ const Home: NextPage = () => {
               </p>
               <a href="#"
                  className="inline-flex items-center justify-center px-5 py-3 mr-3 text-gray-900 border border-gray-300font-medium text-center rounded-lg bg-primary-700 hover:bg-gray-100 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
-                Get started
+                {t.platform}
                 <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20"
                      xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd"
@@ -48,7 +59,7 @@ const Home: NextPage = () => {
               </a>
               <a href="#"
                  className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
-                Speak to Sales
+                {t.courses}
               </a>
             </div>
             <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
