@@ -11,6 +11,7 @@ import lt from "../../locales/lt";
 
 export const Header = () => {
   const { data: sessionData } = useSession();
+
   const router = useRouter();
   const { locale } = router;
   const t =
