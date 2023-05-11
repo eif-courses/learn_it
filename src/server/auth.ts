@@ -2,14 +2,14 @@ import { type GetServerSidePropsContext } from "next";
 import {
   getServerSession,
   type NextAuthOptions,
-  type DefaultSession,
+  type DefaultSession
 } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
+
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { env } from "~/env.mjs";
 import { prisma } from "~/server/db";
-
-
+import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
+import { PrismaClient, User } from '@prisma/client';
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
  * object and keep type safety.
@@ -23,6 +23,7 @@ declare module "next-auth" {
     user: {
       id: string,
       role: string,
+      username: string,
     } & DefaultSession["user"]
   }
 }
@@ -42,6 +43,8 @@ declare module "next-auth" {
 //   // }
 // }
 
+
+
 /**
  * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.
  *
@@ -49,21 +52,69 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-        role: user.role,
-      },
-    }),
+    session({ session, token }) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      session.user.id = token.id;
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      session.user.username = token.username;
+      return session;
+    },
+    jwt({ token, account, user }) {
+      if (account) {
+        token.accessToken = account.access_token;
+        token.id = user.id;
+        token.username = (user as User).username;
+        //token.username = (user as User).username;
+        console.log({ user });
+      }
+      return token;
+    },
   },
+  session: {
+    strategy: 'jwt',
+  },
+  secret: "secret",
   adapter: PrismaAdapter(prisma),
   providers: [
-    DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
+    CredentialsProvider({
+      // The name to display on the sign in form (e.g. "Sign in with...")
+      name: "Credentials",
+      // `credentials` is used to generate a form on the sign in page.
+      // You can specify which fields should be submitted, by adding keys to the `credentials` object.
+      // e.g. domain, username, password, 2FA token, etc.
+      // You can pass any HTML attribute to the <input> tag through the object.
+      credentials: {
+        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        password: { label: "Password", type: "password" }
+      },
+      async authorize(credentials, req) {
+        // Add logic here to look up the user from the credentials supplied
+        //const user = { id: "1", name: "J Smith", email: "jsmith@example.com" }
+        const user = await prisma.user.findFirst({
+          where: {
+            username: credentials?.username,
+            password: credentials?.password,
+          },
+        });
+        if (user) {
+          console.log(user);
+          // Any object returned will be saved in `user` property of the JWT
+          return user
+        } else {
+          // If you return null then an error will be displayed advising the user to check their details.
+          return null
+
+          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
+        }
+      }
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
+
     /**
      * ...add more providers here.
      *

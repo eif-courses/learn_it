@@ -11,6 +11,8 @@ import bg from "../../locales/bg";
 import de from "../../locales/de";
 import it from "../../locales/it";
 import lt from "../../locales/lt";
+import UploadForm from "~/components/SingleFileUploadForm";
+
 
 // https://www.youtube.com/watch?v=J1gzN1SAhyM
 
@@ -68,6 +70,7 @@ const Home: NextPage = () => {
           </div>
         </section>
         <Content />
+        <UploadForm/>
       </main>
     </>
   );
