@@ -94,8 +94,8 @@ export const authOptions: NextAuthOptions = {
         //const user = { id: "1", name: "J Smith", email: "jsmith@example.com" }
         const user = await prisma.user.findFirst({
           where: {
-            name: credentials?.username,
-            email: credentials?.password,
+            username: credentials?.username,
+            password: credentials?.password,
           },
         });
         if (user) {
